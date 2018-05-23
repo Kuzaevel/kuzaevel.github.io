@@ -1,0 +1,75 @@
+<html> 
+<head><meta charset="UTF-8" />
+<title>Begining</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+<!--<script src=“simpleModule.js"></script>-->
+
+<script>
+
+function OrderFormController($scope){
+	// Определение параметров модели. Вид отображения будет зависеть от
+	// обработки циклом массива перечня услуг, для которых автоматически будет	// сгенерирован формат вывода списком через тэг li.
+	$scope.services = [
+		{
+			name: 'Web Development',
+			price: 300,
+			active:true
+		},{
+			name: 'Design',
+			price: 400,
+			active:false
+		},{
+			name: 'Integration',
+			price: 250,
+			active:false
+		},{
+			name: 'Training',
+			price: 220,
+			active:false
+		}
+	];
+	$scope.toggleActive = function(s){
+		s.active = !s.active;
+	};
+	// Вспомогательный метод подсчета общей суммы по всем выбранным
+	// позициям.
+	$scope.total = function(){
+		var total = 0;
+		// Use the angular forEach helper method to
+		// loop through the services array:
+		angular.forEach($scope.services, function(s){
+			if (s.active){
+				total+= s.price;
+			}
+		});
+
+		return total;
+	};
+}
+ 
+</script>
+
+</head> 
+
+<body>
+
+	<form ng-app ng-controller="OrderFormController">
+		<h1>Services</h1>
+		<ul>
+			<!-- Запуск цикла обработки массива с перечнем услуг, назначается при нажатии элемента. При этом если нужно устанавливается активный css-класс. -->
+			<li ng-repeat="service in services" ng-click="toggleActive(service)" ng-class="{active:service.active}">
+				<!-- Обратите внимание на использование фильтра валюты, он задает формат вывода цены. -->
+				{{service.name}} <span>{{service.price | currency}}</span>
+			</li>
+		</ul>
+		<div class="total">
+			<!-- Подсчет общей стоимости всех выбранных услуг. Выводится по заданному формату валюты. -->
+			Total: <span>{{total() | currency}}</span>
+		</div>
+	</form>	
+
+</body>
+</html> 
+
+		
+
