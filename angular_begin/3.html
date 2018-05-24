@@ -1,0 +1,87 @@
+<html> 
+<head><meta charset="UTF-8" />
+<title>Begining</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+<!--<script src=“simpleModule.js"></script>-->
+
+<script>
+var myApp = angular.module('SimpleModule', []);
+
+ myApp.controller('tabsController', ['$scope', function($scope) {
+ $scope.activeTab = 'cont1'; 
+ $scope.switchToTab = function(tab) {
+ $scope.activeTab = tab; 
+ };
+ }]);
+ 
+myApp.controller('MyController', ['$scope', function($scope) {
+ $scope.title = 'Begining'; 
+ $scope.result = 0; 
+ $scope.add = function(a,b) { $scope.result = a + b; }; 
+ $scope.multiple = function(a,b) { $scope.result = a * b; }; }]); 
+ 
+</script>
+
+</script>
+
+</script>
+</head> 
+
+<body ng-app="SimpleModule">
+
+<h1>Geber {{title}}</h1> 
+
+
+<div ng-controller="tabsController">
+	<ul>
+	<ling-class="{'active':activeTab == 'cont1'}"><a href="javascript:;" ng-click="switchToTab('cont1')">
+		first</a>
+		</li>
+		
+	<ling-class="{'active':activeTab == 'cont1'}"><a href="javascript:;" ng-click="switchToTab('cont2')">
+		second</a>
+		</li>
+
+		
+	</ul>
+	
+	<div ng-show="activeTab == 'cont1'" ng-cloak>
+	
+		<div ng-controller="MyController">
+			<p>
+				<label for="valA">Ввведите А:</label>
+				<input type="number" id="valA" ng-model=" valA" />
+			</p>
+		
+			<p>
+				<label for="valB">Ввведите B:</label>
+				<input type="number" id="valB" ng-model=" valB" />
+			</p>
+		
+			<p>Результат: {{result}}</p>
+			<p>
+				<button ng-click=" add(valA,valB);">Сложить</button>
+				<button ng-click=" multiple(valA,valB);">Умножить</button>
+			</p>
+			
+		</div>
+
+	</div>
+	
+	<div ng-show="activeTab == 'cont2'" ng-cloak>
+		<div>
+			<label>Name:</label>
+			<input type = "text" ng-model="yourName" placeholder="Enter">
+			<hr>
+				<h1> Get{{yourName}}</h1>
+
+		</div>
+	</div>	
+	
+</div>
+
+</body>
+</html> 
+
+		
+
